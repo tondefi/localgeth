@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo -e "Once you run 'cleanall' you will lost all data such as keys, tokens, deployed.\nCtrl+C to cancel.\nIf you agree, do not thing and wait for 10s."
+sleep 10
+sudo rm -rf services/blockscout-db-data/ services/redis-data/ services/logs/ services/stats-db-data/
+echo "Data clean."
