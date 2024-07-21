@@ -1,0 +1,6 @@
+local.env
+services/blockscout-db-data
+services/stats-db-data
+services/redis-data
+services/logs
+tmp
