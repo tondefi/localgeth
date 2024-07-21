@@ -7,7 +7,9 @@ map $http_upgrade $connection_upgrade {
 server {
     listen       80;
     server_name  localhost;
-    proxy_http_version 1.1;
+    add_header   Access-Control-Allow-Origin * always;
+    add_header 'Access-Control-Allow-Credentials' '*' always;
+    add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, OPTIONS, DELETE, PATCH' always;
 
     location ~ ^/(api|socket|sitemap.xml|auth/auth0|auth/auth0/callback|auth/logout) {
         proxy_pass            ${BACK_PROXY_PASS};
@@ -35,7 +37,9 @@ server {
 server {
     listen       8080;
     server_name  localhost;
-    proxy_http_version 1.1;
+    add_header   Access-Control-Allow-Origin * always;
+    add_header 'Access-Control-Allow-Credentials' '*' always;
+    add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, OPTIONS, DELETE, PATCH' always;
 
     location / {
         proxy_pass            http://stats:8050/;
@@ -47,13 +51,14 @@ server {
         proxy_set_header      Upgrade "$http_upgrade";
         proxy_set_header      Connection $connection_upgrade;
         proxy_cache_bypass    $http_upgrade;
-        add_header            Access-Control-Allow-Origin *;
     }
 }
 server {
     listen       8081;
     server_name  localhost;
-    proxy_http_version 1.1;
+    add_header   Access-Control-Allow-Origin * always;
+    add_header 'Access-Control-Allow-Credentials' '*' always;
+    add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, OPTIONS, DELETE, PATCH' always;
 
     location / {
         proxy_pass            http://visualizer:8050/;
@@ -69,6 +74,5 @@ server {
         proxy_set_header      Upgrade "$http_upgrade";
         proxy_set_header      Connection $connection_upgrade;
         proxy_cache_bypass    $http_upgrade;
-        add_header            Access-Control-Allow-Origin *;
     }
 }
