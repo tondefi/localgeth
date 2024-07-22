@@ -6,6 +6,10 @@ Ethereum and block explorer for development purpose using docker compose. Do not
 
 Copy `local.env.example` to `local.env`
 
+```
+cd hardhat && npm install && node genkey.js
+```
+
 ## Start/stop
 Start:
 
