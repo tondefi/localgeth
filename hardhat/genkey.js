@@ -1,4 +1,5 @@
 const { ethers } = require('ethers');
+const fs = require('fs');
 
 const generateMnemonic = () => {
   // Generate a random wallet which includes a mnemonic
@@ -12,6 +13,12 @@ const generateMnemonic = () => {
   console.log(`Mnemonic: ${mnemonic}`);
   console.log(`Private Key: ${privateKey}`);
   console.log(`Address: ${address}`);
+
+  if (fs.existsSync('.env')) {
+    const oldEnv = fs.readFileSync('.env', 'utf8');
+    fs.appendFileSync('.env.old', `# ${new Date()}\n${oldEnv}\n`);
+  }
+  fs.writeFileSync('.env', `MNEMONIC="${mnemonic}"\nPRIVATE_KEY=${privateKey}`);
 };
 
 generateMnemonic();
